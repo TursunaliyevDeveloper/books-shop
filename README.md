@@ -1,16 +1,14 @@
 # books_shop
 
-A new Flutter project.
+Mobile app for a bookstore
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+It was prepared for the loiha bookstore. 
 
-A few resources to get you started if this is your first Flutter project:
+Through this application, users can order a book in the application. 
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+The seller can accept orders through Google sheets.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+and the seller can add and edit or delete new books by accessing the
+Admin panel I am currently working on these functions, the program is 60% ready
