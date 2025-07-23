@@ -1,61 +1,29 @@
+// ignore_for_file: unused_local_variable
+
 import 'package:flutter/material.dart';
-import 'package:ziyo_book_shop/src/presentation/about_me.dart';
-import 'package:ziyo_book_shop/src/presentation/settings_page.dart';
+import 'package:intl/intl.dart';
 
 class HomePage extends StatefulWidget {
-  final void Function(ThemeMode) onThemeChanged;
-  const HomePage({super.key, required this.onThemeChanged});
+  const HomePage({super.key});
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<HomePage> createState() => _BooksPageState();
 }
 
-class _HomePageState extends State<HomePage> {
-  int currentIndex = 0;
-  void onPressedBottom(int index) {
-    setState(() {
-      currentIndex = index;
-    });
-  }
-
+class _BooksPageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    // ⚠ widget.onThemeChanged ni build ichida ishlat
-    final List<Widget> buildPages = [
-      AboutMe_Page(),
-      SettingsPage(onThemeChanged: widget.onThemeChanged),
-    ];
+    final formatCurrency = NumberFormat.decimalPattern('uz');
+    final theme = Theme.of(context);
+    final textColor = theme.textTheme.bodyLarge?.color;
     return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor:
-            Theme.of(context).bottomNavigationBarTheme.backgroundColor ??
-            Colors.blue[100],
-        selectedItemColor:
-            Theme.of(context).bottomNavigationBarTheme.selectedItemColor ??
-            Colors.black,
-        unselectedItemColor:
-            Theme.of(context).bottomNavigationBarTheme.unselectedItemColor ??
-            Colors.blueGrey,
-        selectedFontSize: 14,
-        unselectedFontSize: 11,
-        currentIndex: currentIndex,
-        onTap: onPressedBottom,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.menu_book_sharp),
-            label: "Kitoblar",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.location_pin),
-            label: "Biz haqimizda",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: "Ilova sozlamalari",
-          ),
-        ],
+      backgroundColor: theme.scaffoldBackgroundColor,
+      appBar: AppBar(
+        title: Text("Kitob sotib oling", style: TextStyle(color: textColor)),
+        centerTitle: true,
+        backgroundColor: theme.appBarTheme.backgroundColor,
+        iconTheme: theme.iconTheme,
       ),
-      body: buildPages[currentIndex],
+      body: Scaffold(),
     );
   }
 }

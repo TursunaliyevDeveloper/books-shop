@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:ziyo_book_shop/src/presentation/home_page.dart';
+import 'package:ziyo_book_shop/src/presentation/home_appbar.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
