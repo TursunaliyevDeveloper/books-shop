@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ziyo_book_shop/src/presentation/books_list/books_list.dart';
 import 'package:ziyo_book_shop/src/presentation/about_me.dart';
-import 'package:ziyo_book_shop/src/presentation/books_page.dart';
 import 'package:ziyo_book_shop/src/presentation/settings_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -22,8 +20,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     // ⚠ widget.onThemeChanged ni build ichida ishlat
-    final List<Widget> _buildPages = [
-      BooksPage(books: books),
+    final List<Widget> buildPages = [
       AboutMe_Page(),
       SettingsPage(onThemeChanged: widget.onThemeChanged),
     ];
@@ -58,7 +55,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      body: _buildPages[currentIndex],
+      body: buildPages[currentIndex],
     );
   }
 }

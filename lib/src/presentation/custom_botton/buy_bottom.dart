@@ -1,12 +1,10 @@
 import 'dart:convert';
-import 'package:ziyo_book_shop/src/presentation/books_list/books_list.dart';
 import 'package:ziyo_book_shop/src/presentation/custom_botton/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class BuyPage extends StatefulWidget {
-  final BooksList book;
-  const BuyPage({super.key, required this.book});
+  const BuyPage({super.key});
   @override
   State<BuyPage> createState() => _BuyPageState();
 }
@@ -22,18 +20,15 @@ class _BuyPageState extends State<BuyPage> {
   @override
   void initState() {
     super.initState();
-    _kitobNomiController.text = widget.book.title;
   }
 
   Future<void> malumotJonatish() async {
     final Map<String, dynamic> data = {
       "kitob_nomi": _kitobNomiController.text,
-      "narxi": widget.book.discountPrice,
       "familiya": _familiyaController.text,
       "ism": _ismController.text,
       "telefon_raqam": _telefonController.text,
       "izoh": _izohController.text,
-      "rasm_url": widget.book.images[0],
     };
     try {
       final response = await http.post(
@@ -88,19 +83,12 @@ class _BuyPageState extends State<BuyPage> {
     final bool isDark = Theme.of(context).brightness == Brightness.dark;
     final Color textColor = isDark ? Colors.white : Colors.black;
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.book.title, style: TextStyle(fontSize: 14)),
-        centerTitle: true,
-      ),
+      appBar: AppBar(centerTitle: true),
       body: ListView(
         padding: EdgeInsets.all(24),
         children: [
           SizedBox(height: 40),
-          SizedBox(
-            height: 180,
-            width: 140,
-            child: Image.asset(widget.book.images[0], fit: BoxFit.cover),
-          ),
+          SizedBox(height: 180, width: 140),
           SizedBox(height: 20),
           TextField(
             controller: _ismController,

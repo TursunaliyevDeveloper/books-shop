@@ -5,10 +5,10 @@ class AboutMe_Page extends StatelessWidget {
   const AboutMe_Page({super.key});
   @override
   Widget build(BuildContext context) {
-    final String telegramProfile = "https://t.me/samandar_adm1n";
-    final String telegramChannel = "https://t.me/mobile_samandar";
-    final String phoneNumber = "+998882088405";
-    Future<void> _makePhoneCall(String number) async {
+    final String telegramProfile = "https://t.me/Abdu3377";
+    final String telegramChannel = "https://t.me/ziyouzyaypan";
+    final String phoneNumber = "+998913273377";
+    Future<void> makePhoneCall(String number) async {
       final Uri launchUri = Uri(scheme: 'tel', path: number);
       if (await canLaunchUrl(launchUri)) {
         await launchUrl(launchUri);
@@ -17,7 +17,7 @@ class AboutMe_Page extends StatelessWidget {
       }
     }
 
-    Future<void> _launchTelegram(String url) async {
+    Future<void> launchTelegram(String url) async {
       final Uri uri = Uri.parse(url);
       if (await canLaunchUrl(uri)) {
         await launchUrl(uri, mode: LaunchMode.externalApplication);
@@ -82,7 +82,7 @@ class AboutMe_Page extends StatelessWidget {
                 leading: const Icon(Icons.call, color: Colors.blue),
                 title: const Text("Telefon orqali"),
                 subtitle: InkWell(
-                  onTap: () => _makePhoneCall(phoneNumber),
+                  onTap: () => makePhoneCall(phoneNumber),
                   child: Text(
                     phoneNumber,
                     style: TextStyle(color: Colors.blue.shade800),
@@ -93,7 +93,7 @@ class AboutMe_Page extends StatelessWidget {
                 leading: const Icon(Icons.telegram, color: Colors.blue),
                 title: const Text("Telegram profil"),
                 subtitle: InkWell(
-                  onTap: () => _launchTelegram(telegramProfile),
+                  onTap: () => launchTelegram(telegramProfile),
                   child: Text(
                     telegramProfile,
                     style: TextStyle(color: Colors.blue.shade800),
@@ -104,7 +104,7 @@ class AboutMe_Page extends StatelessWidget {
                 leading: const Icon(Icons.telegram, color: Colors.blue),
                 title: const Text("Telegram kanal"),
                 subtitle: InkWell(
-                  onTap: () => _launchTelegram(telegramChannel),
+                  onTap: () => launchTelegram(telegramChannel),
                   child: Text(
                     telegramChannel,
                     style: TextStyle(color: Colors.blue.shade800),
