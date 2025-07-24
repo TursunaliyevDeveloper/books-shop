@@ -40,7 +40,7 @@ class _MyAppState extends State<MyApp> {
       themeMode: _themeMode,
       theme: _buildTheme(Brightness.light),
       darkTheme: _buildTheme(Brightness.dark),
-      home: HomePage(onThemeChanged: _toggleTheme),
+      home: AppBarPage(onThemeChanged: _toggleTheme),
     );
   }
 

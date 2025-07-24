@@ -1,46 +1,37 @@
 import 'package:flutter/material.dart';
-import 'package:books_shop/src/presentation/screens/about_me.dart';
-import 'package:books_shop/src/presentation/screens/settings_page.dart';
+import 'aboutme_page.dart';
+import 'settings_page.dart';
+import 'shopping_page.dart';
 
-class HomePage extends StatefulWidget {
+class AppBarPage extends StatefulWidget {
   final void Function(ThemeMode) onThemeChanged;
-  const HomePage({super.key, required this.onThemeChanged});
+  const AppBarPage({super.key, required this.onThemeChanged});
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<AppBarPage> createState() => _AppBarPageState();
 }
 
-class _HomePageState extends State<HomePage> {
-  int currentIndex = 0;
-  void onPressedBottom(int index) {
-    setState(() {
-      currentIndex = index;
-    });
-  }
-
+class _AppBarPageState extends State<AppBarPage> {
+  int _currentIndex = 0;
+  late final List<Widget> _pages = [
+    const ShoppingPage(),
+    const AboutMePage(),
+    SettingsPage(onThemeChanged: widget.onThemeChanged),
+  ];
   @override
   Widget build(BuildContext context) {
-    // ⚠ widget.onThemeChanged ni build ichida ishlat
-    final List<Widget> buildPages = [
-      HomePage(onThemeChanged: widget.onThemeChanged),
-      AboutMe_Page(),
-      SettingsPage(onThemeChanged: widget.onThemeChanged),
-    ];
+    final theme = Theme.of(context);
+    final navTheme = theme.bottomNavigationBarTheme;
     return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      backgroundColor: theme.scaffoldBackgroundColor,
+      body: _pages[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor:
-            Theme.of(context).bottomNavigationBarTheme.backgroundColor ??
-            Colors.blue[100],
-        selectedItemColor:
-            Theme.of(context).bottomNavigationBarTheme.selectedItemColor ??
-            Colors.black,
-        unselectedItemColor:
-            Theme.of(context).bottomNavigationBarTheme.unselectedItemColor ??
-            Colors.blueGrey,
+        currentIndex: _currentIndex,
+        onTap: (index) => setState(() => _currentIndex = index),
+        backgroundColor: navTheme.backgroundColor ?? Colors.blue[100],
+        selectedItemColor: navTheme.selectedItemColor ?? Colors.black,
+        unselectedItemColor: navTheme.unselectedItemColor ?? Colors.blueGrey,
         selectedFontSize: 14,
         unselectedFontSize: 11,
-        currentIndex: currentIndex,
-        onTap: onPressedBottom,
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.menu_book_sharp),
@@ -52,11 +43,10 @@ class _HomePageState extends State<HomePage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),
-            label: "Ilova sozlamalari",
+            label: "Sozlamalar",
           ),
         ],
       ),
-      body: buildPages[currentIndex],
     );
   }
 }

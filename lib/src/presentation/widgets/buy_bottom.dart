@@ -1,10 +1,13 @@
 import 'dart:convert';
-import 'package:books_shop/src/presentation/custom_botton/custom_button.dart';
+import 'package:books_shop/src/domain/models/books_model.dart';
+import 'package:books_shop/src/presentation/screens/shopping_page.dart';
+import 'package:books_shop/src/presentation/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class BuyPage extends StatefulWidget {
-  const BuyPage({super.key});
+  final Book book;
+  const BuyPage({super.key, required this.book});
   @override
   State<BuyPage> createState() => _BuyPageState();
 }
@@ -20,6 +23,7 @@ class _BuyPageState extends State<BuyPage> {
   @override
   void initState() {
     super.initState();
+    _kitobNomiController.text = widget.book.title;
   }
 
   Future<void> malumotJonatish() async {
@@ -37,6 +41,7 @@ class _BuyPageState extends State<BuyPage> {
         body: jsonEncode(data),
       );
       if (response.statusCode == 200) {
+        showCenterAlert("Buyurtma yuborildi!");
         Navigator.pop(context);
       } else {
         Navigator.pop(context);
@@ -46,7 +51,7 @@ class _BuyPageState extends State<BuyPage> {
     }
   }
 
-  void showCenterAlert(BuildContext context, String message) {
+  void showCenterAlert(String message) {
     final overlay = Overlay.of(context);
     final overlayEntry = OverlayEntry(
       builder: (context) => Positioned.fill(
@@ -57,14 +62,17 @@ class _BuyPageState extends State<BuyPage> {
             child: Material(
               color: Colors.transparent,
               child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 24,
+                  vertical: 16,
+                ),
                 decoration: BoxDecoration(
                   color: Colors.black87,
                   borderRadius: BorderRadius.circular(16),
                 ),
                 child: Text(
                   message,
-                  style: TextStyle(color: Colors.white, fontSize: 18),
+                  style: const TextStyle(color: Colors.white, fontSize: 18),
                 ),
               ),
             ),
@@ -73,7 +81,7 @@ class _BuyPageState extends State<BuyPage> {
       ),
     );
     overlay.insert(overlayEntry);
-    Future.delayed(Duration(seconds: 3), () {
+    Future.delayed(const Duration(seconds: 3), () {
       overlayEntry.remove();
     });
   }
@@ -82,49 +90,81 @@ class _BuyPageState extends State<BuyPage> {
   Widget build(BuildContext context) {
     final bool isDark = Theme.of(context).brightness == Brightness.dark;
     final Color textColor = isDark ? Colors.white : Colors.black;
+    final book = widget.book;
     return Scaffold(
-      appBar: AppBar(centerTitle: true),
+      appBar: AppBar(centerTitle: true, title: const Text("Buyurtma berish")),
       body: ListView(
-        padding: EdgeInsets.all(24),
+        padding: const EdgeInsets.all(24),
         children: [
-          SizedBox(height: 40),
-          SizedBox(height: 180, width: 140),
-          SizedBox(height: 20),
+          const SizedBox(height: 24),
           TextField(
             controller: _ismController,
-            decoration: InputDecoration(hintText: "Ism"),
+            decoration: const InputDecoration(
+              hintText: "Ism",
+              border: OutlineInputBorder(),
+            ),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 12),
           TextField(
             controller: _familiyaController,
-            decoration: InputDecoration(hintText: "Familiya"),
+            decoration: const InputDecoration(
+              hintText: "Familiya",
+              border: OutlineInputBorder(),
+            ),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 12),
           TextField(
             controller: _kitobNomiController,
             readOnly: true,
-            decoration: InputDecoration(hintText: "Kitob nomi"),
+            decoration: const InputDecoration(
+              hintText: "Kitob nomi",
+              border: OutlineInputBorder(),
+            ),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 12),
           TextField(
             controller: _telefonController,
             keyboardType: TextInputType.phone,
-            decoration: InputDecoration(hintText: "Telefon raqam"),
+            decoration: const InputDecoration(
+              hintText: "Telefon raqam",
+              border: OutlineInputBorder(),
+            ),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 12),
           TextField(
             controller: _izohController,
-            decoration: InputDecoration(hintText: "Izoh"),
+            maxLines: 3,
+            decoration: const InputDecoration(
+              hintText: "Izoh",
+              border: OutlineInputBorder(),
+            ),
           ),
-          SizedBox(height: 30),
-
-          /// 🔘 Tugma (matn rangi theme asosida o‘zgaradi)
+          const SizedBox(height: 24),
           CustomButton(
             matn: "Xarid qilish uchun\nariza qoldirish",
             onPressedButton: malumotJonatish,
             icon: Icons.shopping_cart,
             textStyle: TextStyle(fontSize: 16, color: textColor),
           ),
+          if (book.images.isNotEmpty)
+            ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: SizedBox(
+                height: 260,
+                child: PageView.builder(
+                  itemCount: book.images.length > 2 ? 2 : book.images.length,
+                  itemBuilder: (context, index) {
+                    final imageUrl = book.images[index].toDriveUrl();
+                    return Image.network(
+                      imageUrl,
+                      fit: BoxFit.cover,
+                      errorBuilder: (_, __, ___) =>
+                          const Icon(Icons.broken_image, size: 48),
+                    );
+                  },
+                ),
+              ),
+            ),
         ],
       ),
     );

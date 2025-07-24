@@ -1,59 +1,51 @@
-import 'package:books_shop/src/presentation/custom_botton/custom_button.dart';
 import 'package:flutter/material.dart';
+import 'package:books_shop/src/presentation/widgets/custom_button.dart';
 
 class SettingsPage extends StatefulWidget {
   final void Function(ThemeMode) onThemeChanged;
   const SettingsPage({super.key, required this.onThemeChanged});
+
   @override
   State<SettingsPage> createState() => _SettingsPageState();
 }
 
 class _SettingsPageState extends State<SettingsPage> {
   ThemeMode _currentMode = ThemeMode.light;
+
   void _toggleTheme() {
-    setState(() {
-      if (_currentMode == ThemeMode.light) {
-        _currentMode = ThemeMode.dark;
-      } else {
-        _currentMode = ThemeMode.light;
-      }
-    });
+    _currentMode = _currentMode == ThemeMode.light
+        ? ThemeMode.dark
+        : ThemeMode.light;
     widget.onThemeChanged(_currentMode);
+    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+
     return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      backgroundColor: theme.scaffoldBackgroundColor,
       appBar: AppBar(
         centerTitle: true,
-        title: Text(
-          "Sozlamalar",
-          style: TextStyle(color: Theme.of(context).textTheme.bodyLarge!.color),
-        ),
-        backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
-        iconTheme: Theme.of(context).iconTheme,
+        title: Text("Sozlamalar", style: theme.textTheme.bodyLarge),
+        backgroundColor: theme.appBarTheme.backgroundColor,
+        iconTheme: theme.iconTheme,
       ),
       body: Column(
         children: [
           const SizedBox(height: 24),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              CustomButton(
-                textStyle: TextStyle(
-                  color: Theme.of(context).textTheme.bodyLarge!.color,
-                  fontSize: 14,
-                ),
-                onPressedButton: _toggleTheme,
-                matn: "Dark or Light rejim",
-                icon: isDark ? Icons.dark_mode : Icons.light_mode,
-              ),
-            ],
+          Center(
+            child: CustomButton(
+              matn: "Ilova rejimi: Yorugʻ yoki Qorongʻi",
+              icon: isDark ? Icons.dark_mode : Icons.light_mode,
+              textStyle: theme.textTheme.bodyLarge!.copyWith(fontSize: 14),
+              onPressedButton: _toggleTheme,
+            ),
           ),
           const SizedBox(height: 16),
-          Text(
+          const Text(
             "Ilova versiyasi: 0.1",
             style: TextStyle(fontSize: 10, color: Colors.grey),
           ),
