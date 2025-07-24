@@ -1,4 +1,4 @@
-import 'package:ziyo_book_shop/src/presentation/custom_botton/custom_button.dart';
+import 'package:books_shop/src/presentation/custom_botton/custom_button.dart';
 import 'package:flutter/material.dart';
 
 class SettingsPage extends StatefulWidget {

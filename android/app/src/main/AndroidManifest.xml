@@ -1,11 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.books_shop">  <!-- 👈 bu sizda bo'lishi mumkin -->
-
-    <!-- ✅ INTERNET ruxsatini qo‘shamiz -->
+    package="com.example.books_shop"> 
     <uses-permission android:name="android.permission.INTERNET" />
-
     <application
-        android:label="Ziyo Book Shop"
+        android:label="Books Shop"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
 

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "594619912638",
+    "project_id": "books-shop-eff2a",
+    "storage_bucket": "books-shop-eff2a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:594619912638:android:6c51be79288c3fd8ad69ef",
+        "android_client_info": {
+          "package_name": "com.example.admin_panel"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC5O6HsWYK_avRmI1JECM7jFeJBwgQSEjs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:594619912638:android:e5d0f0c02b812e48ad69ef",
+        "android_client_info": {
+          "package_name": "com.example.books_shop"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC5O6HsWYK_avRmI1JECM7jFeJBwgQSEjs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ziyo_book_shop/src/presentation/about_me.dart';
-import 'package:ziyo_book_shop/src/presentation/settings_page.dart';
+import 'package:books_shop/src/presentation/screens/about_me.dart';
+import 'package:books_shop/src/presentation/screens/settings_page.dart';
 
 class HomePage extends StatefulWidget {
   final void Function(ThemeMode) onThemeChanged;
