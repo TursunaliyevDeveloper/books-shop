@@ -1,7 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:books_shop/src/presentation/screens/app_bar_page.dart';
+import 'package:ziyo_yaypan_kitoblar/src/presentation/screens/app_bar_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

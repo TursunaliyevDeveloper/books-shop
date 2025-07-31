@@ -1,7 +1,7 @@
 import 'dart:convert';
-import 'package:books_shop/src/domain/models/books_model.dart';
-import 'package:books_shop/src/presentation/screens/shopping_page.dart';
-import 'package:books_shop/src/presentation/widgets/custom_button.dart';
+import 'package:ziyo_yaypan_kitoblar/src/domain/models/books_model.dart';
+import 'package:ziyo_yaypan_kitoblar/src/presentation/screens/shopping_page.dart';
+import 'package:ziyo_yaypan_kitoblar/src/presentation/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -26,30 +26,45 @@ class _BuyPageState extends State<BuyPage> {
     _kitobNomiController.text = widget.book.title;
   }
 
-  Future<void> malumotJonatish() async {
-    final Map<String, dynamic> data = {
-      "kitob_nomi": _kitobNomiController.text,
-      "familiya": _familiyaController.text,
-      "ism": _ismController.text,
-      "telefon_raqam": _telefonController.text,
-      "izoh": _izohController.text,
-    };
-    try {
-      final response = await http.post(
-        Uri.parse(apiUrl),
-        headers: {"Content-Type": "application/json"},
-        body: jsonEncode(data),
-      );
-      if (response.statusCode == 200) {
-        showCenterAlert("Buyurtma yuborildi!");
-        Navigator.pop(context);
-      } else {
-        Navigator.pop(context);
-      }
-    } catch (e) {
-      Navigator.pop(context);
-    }
+ Future<void> malumotJonatish() async {
+  if (_ismController.text.trim().isEmpty ||
+      _familiyaController.text.trim().isEmpty ||
+      _telefonController.text.trim().isEmpty) {
+    showCenterAlert("Iltimos, barcha majburiy maydonlarni to‘ldiring!");
+    return;
   }
+  showDialog(
+    context: context,
+    barrierDismissible: false,
+    builder: (_) => const Center(child: CircularProgressIndicator()),
+  );
+  final Map<String, dynamic> data = {
+    "kitob_nomi": _kitobNomiController.text,
+    "familiya": _familiyaController.text,
+    "ism": _ismController.text,
+    "telefon_raqam": _telefonController.text,
+    "izoh": _izohController.text,
+  };
+  try {
+    final response = await http.post(
+      Uri.parse(apiUrl),
+      headers: {"Content-Type": "application/json"},
+      body: jsonEncode(data),
+    );
+    Navigator.pop(context); 
+    if (response.statusCode == 200) {
+      showCenterAlert("Buyurtma yuborildi!");
+      Future.delayed(const Duration(seconds: 2), () {
+        Navigator.pop(context); 
+      });
+    } else {    Navigator.pop(context);
+    }
+  } catch (e) {
+    Navigator.pop(context);
+  }
+}
+
+
 
   void showCenterAlert(String message) {
     final overlay = Overlay.of(context);

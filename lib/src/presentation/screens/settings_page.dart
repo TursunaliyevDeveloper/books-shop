@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:books_shop/src/presentation/widgets/custom_button.dart';
+import 'package:ziyo_yaypan_kitoblar/src/presentation/widgets/custom_button.dart';
 
 class SettingsPage extends StatefulWidget {
   final void Function(ThemeMode) onThemeChanged;

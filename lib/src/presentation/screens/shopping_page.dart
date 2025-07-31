@@ -1,11 +1,10 @@
-import 'package:books_shop/src/data/sources/remote/firestore_book_datasource.dart';
-import 'package:books_shop/src/domain/models/books_model.dart';
-import 'package:books_shop/src/presentation/widgets/buy_bottom.dart';
+import 'package:ziyo_yaypan_kitoblar/src/data/sources/remote/firestore_book_datasource.dart';
+import 'package:ziyo_yaypan_kitoblar/src/domain/models/books_model.dart';
+import 'package:ziyo_yaypan_kitoblar/src/presentation/widgets/buy_bottom.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class ShoppingPage extends StatefulWidget {
-  const ShoppingPage({super.key});
   @override
   State<ShoppingPage> createState() => _ShoppingPageState();
 }
@@ -84,7 +83,10 @@ class _ShoppingPageState extends State<ShoppingPage> {
   }
 
   Widget _buildBookCard(Book book) {
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
     return Card(
+      color: theme.appBarTheme.backgroundColor,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       elevation: 3,
       child: Padding(
@@ -147,7 +149,7 @@ class _ShoppingPageState extends State<ShoppingPage> {
                           "${_formatCurrency.format(book.price)} so'm",
                           style: const TextStyle(
                             decoration: TextDecoration.lineThrough,
-                            color: Colors.grey,
+                            color: Colors.red,
                           ),
                         ),
                         const SizedBox(width: 8),

@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:books_shop/src/domain/models/books_model.dart';
+import 'package:ziyo_yaypan_kitoblar/src/domain/models/books_model.dart';
 
 class FirestoreBookDataSource {
   final CollectionReference booksRef = FirebaseFirestore.instance.collection(

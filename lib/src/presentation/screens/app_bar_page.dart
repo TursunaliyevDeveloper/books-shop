@@ -13,7 +13,7 @@ class AppBarPage extends StatefulWidget {
 class _AppBarPageState extends State<AppBarPage> {
   int _currentIndex = 0;
   late final List<Widget> _pages = [
-    const ShoppingPage(),
+     ShoppingPage(),
     const AboutMePage(),
     SettingsPage(onThemeChanged: widget.onThemeChanged),
   ];

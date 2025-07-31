@@ -2,7 +2,7 @@
     package="com.example.books_shop"> 
     <uses-permission android:name="android.permission.INTERNET" />
     <application
-        android:label="Books Shop"
+        android:label="Ziyo Yaypan Kitoblar"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
 
